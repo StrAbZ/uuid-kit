@@ -22,7 +22,7 @@ import Testing
 
     @Test func fields() {
         let uuid = UUIDv6("1efcb6ef-d587-6a90-b15f-537f6c98e2c2")
-        #expect(uuid?.timestamp.rawValue == 0xd5871efcb6efa)
+        #expect(uuid?.timestamp.rawValue == 0x1efcb6efd5870b0)
         #expect(uuid?.clockSequence.rawValue == 0x315f)
         #expect(uuid?.node.rawValue == 0x537f6c98e2c2)
     }

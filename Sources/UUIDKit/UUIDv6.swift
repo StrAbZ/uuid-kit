@@ -29,13 +29,13 @@ public struct UUIDv6: Codable, Hashable, LosslessStringConvertible, RawRepresent
 
     public init(timestamp: Timestamp, clockSequence: ClockSequence, node: Node) {
         var bytes = UUID.null.uuid
-        bytes.0 = UInt8(truncatingIfNeeded: timestamp.rawValue >> 56)
-        bytes.1 = UInt8(truncatingIfNeeded: timestamp.rawValue >> 48)
-        bytes.2 = UInt8(truncatingIfNeeded: timestamp.rawValue >> 40)
-        bytes.3 = UInt8(truncatingIfNeeded: timestamp.rawValue >> 32)
-        bytes.4 = UInt8(truncatingIfNeeded: timestamp.rawValue >> 16)
-        bytes.5 = UInt8(truncatingIfNeeded: timestamp.rawValue >> 8)
-        bytes.6 = UInt8(truncatingIfNeeded: timestamp.rawValue) & 0x0f | 0x60
+        bytes.0 = UInt8(truncatingIfNeeded: timestamp.rawValue >> 52)
+        bytes.1 = UInt8(truncatingIfNeeded: timestamp.rawValue >> 44)
+        bytes.2 = UInt8(truncatingIfNeeded: timestamp.rawValue >> 36)
+        bytes.3 = UInt8(truncatingIfNeeded: timestamp.rawValue >> 28)
+        bytes.4 = UInt8(truncatingIfNeeded: timestamp.rawValue >> 20)
+        bytes.5 = UInt8(truncatingIfNeeded: timestamp.rawValue >> 12)
+        bytes.6 = UInt8(truncatingIfNeeded: timestamp.rawValue >> 4) & 0x0f | 0x60
         bytes.7 = UInt8(truncatingIfNeeded: timestamp.rawValue)
         bytes.8 = UInt8(truncatingIfNeeded: clockSequence.rawValue >> 8) & 0x3f | 0x80
         bytes.9 = UInt8(truncatingIfNeeded: clockSequence.rawValue)
@@ -68,13 +68,14 @@ public struct UUIDv6: Codable, Hashable, LosslessStringConvertible, RawRepresent
     public var timestamp: Timestamp {
         let bytes = rawValue.uuid
         var rawValue: UInt64 = 0
-        rawValue |= UInt64(bytes.0) << 28
-        rawValue |= UInt64(bytes.1) << 20
-        rawValue |= UInt64(bytes.2) << 12
-        rawValue |= UInt64(bytes.3) << 4
-        rawValue |= UInt64(bytes.4) << 44
-        rawValue |= UInt64(bytes.5) << 36
-        rawValue |= UInt64(bytes.6 & 0x0f)
+        rawValue |= UInt64(bytes.0) << 52
+        rawValue |= UInt64(bytes.1) << 44
+        rawValue |= UInt64(bytes.2) << 36
+        rawValue |= UInt64(bytes.3) << 28
+        rawValue |= UInt64(bytes.4) << 20
+        rawValue |= UInt64(bytes.5) << 12
+        rawValue |= UInt64(bytes.6 & 0x0f) << 4
+        rawValue |= UInt64(bytes.7)
         return Timestamp(truncatingIfNeeded: rawValue)
     }
 
