@@ -3,23 +3,24 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 [![Swift 5.1](https://img.shields.io/badge/swift-5.1-brightgreen.svg)](https://swift.org)
 
-UUIDKit is a Swift library for generating and working with Universally Unique Identifiers (UUIDs) as specified in [RFC 4122](https://tools.ietf.org/html/rfc4122.html).
+UUIDKit is a Swift library for generating and working with Universally Unique Identifiers (UUIDs) as specified in [RFC 9562](https://datatracker.ietf.org/doc/html/rfc9562.html).
 
 It extends the existing Foundation's [`UUID`](https://developer.apple.com/documentation/foundation/uuid) type.
 
 ## Generating UUIDs
 
-The default initializer for `UUID` returns a random (version 4) UUID. This library adds methods for creating version 1, version 3 and version 5 UUIDs.
+The default initializer for `UUID` returns a random (version 4) UUID. This library adds methods for creating version 1, version 3, version 5 and version 6 UUIDs.
 
-### Time-based UUIDs (UUID.v1)
+### Time-based UUIDs (UUID.v1 and UUID.v6)
 
-`UUID.v1` returns a time-based (version 1) UUID.
+`UUID.v1` and `UUID.v6` returns a time-based (version 1 and version 6) UUID.
 
 ```swift
 let uuidv1 = UUID.v1()
+let uuidv6 = UUID.v6()
 ```
 
-Instead of relying on the computer's Ethernet address to ensure global uniqueness of time-based UUIDs, this method generates a random node identifier that is used for the duration of the program's execution, as specified in [RFC 4122 section 4.5](https://datatracker.ietf.org/doc/html/rfc4122.html#section-4.5). The reason is discussed in [this issue](https://github.com/baarde/uuid-kit/issues/4).
+Instead of relying on the computer's Ethernet address to ensure global uniqueness of time-based UUIDs, this method generates a random node identifier that is used for the duration of the program's execution, as specified in [RFC 9562 section 6.10](https://datatracker.ietf.org/doc/html/rfc9562.html#section-6.10). The reason is discussed in [this issue](https://github.com/baarde/uuid-kit/issues/4).
 
 ### Random UUIDs (UUID.v4)
 
